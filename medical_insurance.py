@@ -18,3 +18,11 @@ print("Here is the first medical record: ",first_medical_record)
 medical_records.sort()
 print("Here are the medical records sorted by insurance cost: ",medical_records)
 
+cheapest_three=medical_records[slice(0,3)]
+print(cheapest_three)
+
+priciest_three = medical_records[-3:]
+print("Here are the three most expensive insurance costs in our medical records: ",priciest_three)
+
+occurences_paul=names.count("Paul")
+print("There are ",occurences_paul,"individuals with the name Paul in our medical records.")
