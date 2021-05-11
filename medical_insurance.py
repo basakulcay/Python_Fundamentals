@@ -1,28 +1,30 @@
-names = ["Mohamed", "Sara", "Xia", "Paul", "Valentina", "Jide", "Aaron", "Emily", "Nikita", "Paul"]
-insurance_costs = [13262.0, 4816.0, 6839.0, 5054.0, 14724.0, 5360.0, 7640.0, 6072.0, 2750.0, 12064.0]
+names = ["Judith", "Abel", "Tyson", "Martha", "Beverley", "David", "Anabel"]
+estimated_insurance_costs = [1000.0, 2000.0, 3000.0, 4000.0, 5000.0, 6000.0, 7000.0]
+actual_insurance_costs = [1100.0, 2200.0, 3300.0, 4400.0, 5500.0, 6600.0, 7700.0]
 
 # Add your code here
-names.append("Priscilla")
-insurance_costs.append(8320.0)
+total_cost = 0
 
-medical_records=list(zip(insurance_costs,names))
+for i in actual_insurance_costs:
+  total_cost+=i
+  
+average_cost = total_cost/len(actual_insurance_costs)
 
-print(medical_records)
+print("The total cost is: ",total_cost)
+print("Average Insurance Cost: ",average_cost," dollars")
 
-num_medical_records = len(medical_records)
-print("There are ",num_medical_records,"medical reports.")
+for i in range(len(names)):
+  name=names[i]
+  insurance_cost=actual_insurance_costs[i]
+  print("The insurance cost for ",name," is ",insurance_cost," dollars.")
+  if insurance_cost > average_cost:
+    print("The insurance cost for "+name +"is above average.")
+  elif insurance_cost > average_cost:
+    print("The insurance cost for "+name +"is below average.")
+  else:
+    print("The insurance cost for "+name +"is equal to the average.")
 
-first_medical_record = medical_records[0]
-print("Here is the first medical record: ",first_medical_record)
+updated_estimated_costs = [cost*11/10 for cost in estimated_insurance_costs]
+print(updated_estimated_costs)
+print(actual_insurance_costs)
 
-medical_records.sort()
-print("Here are the medical records sorted by insurance cost: ",medical_records)
-
-cheapest_three=medical_records[slice(0,3)]
-print(cheapest_three)
-
-priciest_three = medical_records[-3:]
-print("Here are the three most expensive insurance costs in our medical records: ",priciest_three)
-
-occurences_paul=names.count("Paul")
-print("There are ",occurences_paul,"individuals with the name Paul in our medical records.")
