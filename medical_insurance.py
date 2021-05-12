@@ -1,30 +1,69 @@
-names = ["Judith", "Abel", "Tyson", "Martha", "Beverley", "David", "Anabel"]
-estimated_insurance_costs = [1000.0, 2000.0, 3000.0, 4000.0, 5000.0, 6000.0, 7000.0]
-actual_insurance_costs = [1100.0, 2200.0, 3300.0, 4400.0, 5500.0, 6600.0, 7700.0]
-
+medical_data = \
+"""Marina Allison   ,27   ,   31.1 , 
+#7010.0   ;Markus Valdez   ,   30, 
+22.4,   #4050.0 ;Connie Ballard ,43 
+,   25.3 , #12060.0 ;Darnell Weber   
+,   35   , 20.6   , #7500.0;
+Sylvie Charles   ,22, 22.1 
+,#3022.0   ;   Vinay Padilla,24,   
+26.9 ,#4620.0 ;Meredith Santiago, 51   , 
+29.3 ,#16330.0;   Andre Mccarty, 
+19,22.7 , #2900.0 ; 
+Lorena Hodson ,65, 33.1 , #19370.0; 
+Isaac Vu ,34, 24.8,   #7045.0"""
 # Add your code here
-total_cost = 0
 
-for i in actual_insurance_costs:
-  total_cost+=i
-  
-average_cost = total_cost/len(actual_insurance_costs)
+updated_medical_data = medical_data.replace("#","$")
+#print(updated_medical_data)
 
-print("The total cost is: ",total_cost)
-print("Average Insurance Cost: ",average_cost," dollars")
+num_records = 0
+for data in updated_medical_data:
+  if data == "$":
+    num_records+=1
+print("There are "+str(num_records)+" medical records in the data.")
 
-for i in range(len(names)):
-  name=names[i]
-  insurance_cost=actual_insurance_costs[i]
-  print("The insurance cost for ",name," is ",insurance_cost," dollars.")
-  if insurance_cost > average_cost:
-    print("The insurance cost for "+name +"is above average.")
-  elif insurance_cost > average_cost:
-    print("The insurance cost for "+name +"is below average.")
-  else:
-    print("The insurance cost for "+name +"is equal to the average.")
+medical_data_split = updated_medical_data.split(";")
+#print(medical_data_split)
 
-updated_estimated_costs = [cost*11/10 for cost in estimated_insurance_costs]
-print(updated_estimated_costs)
-print(actual_insurance_costs)
+medical_records =[]
 
+for record in medical_data_split:
+  medical_records.append(record.split(","))
+#print(medical_records)
+
+medical_records_clean = []
+for records in medical_records:
+  record_clean=[]
+  for item in records:
+    record_clean.append(item.strip())
+  medical_records_clean.append(record_clean)
+print(medical_records_clean)
+
+for record in medical_records_clean:
+  print(record[0].upper())
+
+names=[]
+ages=[]
+bmis=[]
+insurance_costs=[]
+
+for record in medical_records_clean:
+  names.append((record[0]))
+  ages.append((record[1]))
+  bmis.append((record[2]))
+  insurance_costs.append((record[3]))
+
+print(names)
+print(ages)
+print(bmis)
+print(insurance_costs)
+
+
+total_bmi=0
+counter=0
+for i in bmis:
+  counter+=1
+  total_bmi+=float(i)
+average_bmi=total_bmi/counter
+print(total_bmi)
+print("Average BMI: ",average_bmi)
