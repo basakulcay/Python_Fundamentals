@@ -1,69 +1,57 @@
-medical_data = \
-"""Marina Allison   ,27   ,   31.1 , 
-#7010.0   ;Markus Valdez   ,   30, 
-22.4,   #4050.0 ;Connie Ballard ,43 
-,   25.3 , #12060.0 ;Darnell Weber   
-,   35   , 20.6   , #7500.0;
-Sylvie Charles   ,22, 22.1 
-,#3022.0   ;   Vinay Padilla,24,   
-26.9 ,#4620.0 ;Meredith Santiago, 51   , 
-29.3 ,#16330.0;   Andre Mccarty, 
-19,22.7 , #2900.0 ; 
-Lorena Hodson ,65, 33.1 , #19370.0; 
-Isaac Vu ,34, 24.8,   #7045.0"""
 # Add your code here
+medical_costs = {
+  "Marina":6607.0,"Vinay":3225.0
+}
 
-updated_medical_data = medical_data.replace("#","$")
-#print(updated_medical_data)
+medical_costs.update(
+  {"Connie":8886.0,"Isaac":16444.0,"Valentina":6420.0}
+  )
 
-num_records = 0
-for data in updated_medical_data:
-  if data == "$":
-    num_records+=1
-print("There are "+str(num_records)+" medical records in the data.")
+print(medical_costs)
+medical_costs.update({"Vinay":3325.0})
+print(medical_costs)
 
-medical_data_split = updated_medical_data.split(";")
-#print(medical_data_split)
+total_cost = 0
 
-medical_records =[]
+for i in medical_costs.values():
+  total_cost+=i
 
-for record in medical_data_split:
-  medical_records.append(record.split(","))
-#print(medical_records)
+print("The total cost is: "+str(total_cost))
 
-medical_records_clean = []
-for records in medical_records:
-  record_clean=[]
-  for item in records:
-    record_clean.append(item.strip())
-  medical_records_clean.append(record_clean)
-print(medical_records_clean)
+average_cost = total_cost/len(medical_costs)
+print("Average Insurance Cost: "+str(average_cost))
 
-for record in medical_records_clean:
-  print(record[0].upper())
+names = ["Marina", "Vinay", "Connie", "Isaac", "Valentina"]
+ages = [27, 24, 43, 35, 52]
 
-names=[]
-ages=[]
-bmis=[]
-insurance_costs=[]
+zipped_ages = zip(names,ages)
 
-for record in medical_records_clean:
-  names.append((record[0]))
-  ages.append((record[1]))
-  bmis.append((record[2]))
-  insurance_costs.append((record[3]))
+names_to_ages = {key:value for key,value in zipped_ages}
+print(names_to_ages)
 
-print(names)
-print(ages)
-print(bmis)
-print(insurance_costs)
+marina_age=names_to_ages.get("Marina")
+print("Marina's age is "+str(marina_age))
 
+medical_records={}
 
-total_bmi=0
-counter=0
-for i in bmis:
-  counter+=1
-  total_bmi+=float(i)
-average_bmi=total_bmi/counter
-print(total_bmi)
-print("Average BMI: ",average_bmi)
+medical_records["Marina"]={"Age": 27, "Sex": "Female", "BMI": 31.1, "Children": 2, "Smoker": "Non-smoker", "Insurance_cost": 6607.0}
+medical_records["Vinay"]={"Age": 24, "Sex": "Male", "BMI": 26.9, "Children": 0, "Smoker": "Non-smoker", "Insurance_cost": 3225.0}
+medical_records["Connie"] = {"Age": 43, "Sex": "Female", "BMI": 25.3, "Children": 3, "Smoker": "Non-smoker", "Insurance_cost": 8886.0}
+medical_records["Isaac"] = {"Age": 35, "Sex": "Male", "BMI": 20.6, "Children": 4, "Smoker": "Smoker", "Insurance_cost": 16444.0}
+medical_records["Valentina"] = {"Age": 52, "Sex": "Female", "BMI": 18.7, "Children": 1, "Smoker": "Non-smoker", "Insurance_cost": 6420.0}
+
+print(medical_records)
+
+print("Connie's insurance cost is "+str(medical_records["Connie"]["Insurance_cost"])+" dollars.")
+
+medical_records.pop("Vinay")
+print(" ")
+print(medical_records)
+
+print("\n")
+for name, record in medical_records.items():
+  print(name + " is a " + str(record["Age"]) + \
+  " year old " + record["Sex"] + " " + record["Smoker"] \
+  + " with a BMI of " + str(record["BMI"]) + \
+  " and insurance cost of " + str(record["Insurance_cost"]))
+
